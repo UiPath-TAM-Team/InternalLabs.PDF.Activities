@@ -1,0 +1,106 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFrameworks>net461;net6.0-windows7.0</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>InternalLabs.PDF.Activities.Design</RootNamespace>
+    <AssemblyName>InternalLabs.PDF.Activities.Design</AssemblyName>
+    <PackageId>InternalLabs.PDF.Activities</PackageId>
+    <EnableDefaultPageItems>false</EnableDefaultPageItems>
+  </PropertyGroup>
+  <!-- Package Metadata -->
+  <PropertyGroup>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+	<PackageLicenseUrl>https://www.uipath.com/hubfs/legalspot/UiPath_Activity_License_Agreement.pdf</PackageLicenseUrl>
+    <Description>This package was generated using the UiPath VS Extension.</Description>
+    <Authors>Company</Authors>
+    <Company>Company</Company>
+    <Copyright>© 2024 UiPath</Copyright>
+    <PackageTags>UiPath Activit𝗒</PackageTags>
+    <PackageProjectUrl>https://marketplace.uipath.com/listings/uipathteam-extensions-activities</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/NuGet/Samples/master/PackageIconNuspecExample/icon.png</PackageIconUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+	<Version Condition="'$(version)' == ''">0.0.0</Version>
+  </PropertyGroup>
+  <!-- Package Versions -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug' AND '$(DesignTimeBuild)' != 'true'">
+    <PackageVersion>$(Version).$([System.DateTime]::UtcNow.ToString(MMddHHmmss))-dev</PackageVersion>
+  </PropertyGroup>
+  <!-- ignore build warnings -->
+  <PropertyGroup>
+    <NoWarn>CS1701;CS1702;CA1416;CS1572;CS1573;CS1591;CS1998</NoWarn>
+  </PropertyGroup>
+  <!-- Package Icon -->
+  <ItemGroup>
+    <None Include="packageIcon.png" Pack="true" Visible="false" PackagePath="" />
+  </ItemGroup>
+  <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="BuildOnlySettings;ResolveReferences">
+    <ItemGroup>
+      <!--Filter out unnecessary files-->
+      <_ReferenceCopyLocalPaths Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')-&gt;WithMetadataValue('PrivateAssets', 'All'))" />
+    </ItemGroup>
+    <!--Print batches for debug purposes-->
+    <Message Text="Batch for .nupkg: ReferenceCopyLocalPaths = @(_ReferenceCopyLocalPaths), ReferenceCopyLocalPaths.DestinationSubDirectory = %(_ReferenceCopyLocalPaths.DestinationSubDirectory) Filename = %(_ReferenceCopyLocalPaths.Filename) Extension = %(_ReferenceCopyLocalPaths.Extension)" Importance="High" Condition="'@(_ReferenceCopyLocalPaths)' != ''" />
+    <ItemGroup>
+      <!--Add file to package with consideration of sub folder. If empty, the root folder is chosen.-->
+      <BuildOutputInPackage Include="@(_ReferenceCopyLocalPaths)" TargetPath="%(_ReferenceCopyLocalPaths.DestinationSubDirectory)" />
+    </ItemGroup>
+  </Target>
+  <PropertyGroup>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <DocumentationFile>bin\$(Configuration)\InternalLabs.PDF.Activities.Design.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
+    <Reference Include="System"/>
+    <Reference Include="System.Activities"/>
+    <Reference Include="System.Activities.Core.Presentation"/>
+    <Reference Include="System.Activities.Presentation"/>
+    <Reference Include="System.ComponentModel.Composition"/>
+    <Reference Include="System.Core"/>
+    <Reference Include="System.Xml.Linq"/>
+    <Reference Include="System.Data.DataSetExtensions"/>
+    <Reference Include="Microsoft.CSharp"/>
+    <Reference Include="System.Data"/>
+    <Reference Include="System.Net.Http"/>
+    <Reference Include="System.Xml"/>
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0-windows7.0' ">
+    <PackageReference Include="UiPath.Workflow.Runtime" Version="6.0.0-*" PrivateAssets="All"/>
+    <PackageReference Include="UiPath.Workflow" Version="6.0.0-*" PrivateAssets="All"/>
+    <PackageReference Include="System.Activities.Core.Presentation" Version="6.0.0-*" PrivateAssets="All"/>
+    <PackageReference Include="System.Activities.Metadata" Version="6.0.0-*" PrivateAssets="All"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\Shared\Themes\Generic.xaml">
+      <Link>Themes\Generic.xaml</Link>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\Icons.xaml">
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InternalLabs.PDF.Activities\InternalLabs.PDF.Activities.csproj" PrivateAssets="All"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.*.resx">
+      <DependentUpon>Resources.resx</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="..\..\Shared\UiPath.Shared.Activities.Design\UiPath.Shared.Activities.Design.projitems" Label="Shared" />
+</Project>
