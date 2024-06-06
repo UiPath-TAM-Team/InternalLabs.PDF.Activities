@@ -71,7 +71,7 @@
     <PackageReference Include="System.Activities.Metadata" Version="6.0.0-*" PrivateAssets="All"/>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Spire.PDF" Version="10.4.7" />
+    <PackageReference Include="Spire.PDF" Version="10.6.0" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="..\..\Shared\Themes\Generic.xaml">
