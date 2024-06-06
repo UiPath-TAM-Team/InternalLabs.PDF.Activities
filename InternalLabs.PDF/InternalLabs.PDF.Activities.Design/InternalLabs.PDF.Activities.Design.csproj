@@ -11,12 +11,12 @@
   <PropertyGroup>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 	<PackageLicenseUrl>https://www.uipath.com/hubfs/legalspot/UiPath_Activity_License_Agreement.pdf</PackageLicenseUrl>
-    <Description>This package was generated using the UiPath VS Extension.</Description>
-    <Authors>Company</Authors>
-    <Company>Company</Company>
-    <Copyright>© 2024 UiPath</Copyright>
-    <PackageTags>UiPath Activit𝗒</PackageTags>
-    <PackageProjectUrl>https://marketplace.uipath.com/listings/uipathteam-extensions-activities</PackageProjectUrl>
+    <Description>Seamlessly extract digital signatures from PDFs.</Description>
+    <Authors>UiPath</Authors>
+    <Company>UiPath</Company>
+    <Copyright>© $([System.DateTime]::UtcNow.ToString(yyyy)) UiPath</Copyright>
+    <PackageTags>UiPath PDF Certificate Extract Digital Signature</PackageTags>
+    <PackageProjectUrl>https://marketplace.uipath.com/listings/pdf-signature-extractor</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/NuGet/Samples/master/PackageIconNuspecExample/icon.png</PackageIconUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
@@ -69,6 +69,9 @@
     <PackageReference Include="UiPath.Workflow" Version="6.0.0-*" PrivateAssets="All"/>
     <PackageReference Include="System.Activities.Core.Presentation" Version="6.0.0-*" PrivateAssets="All"/>
     <PackageReference Include="System.Activities.Metadata" Version="6.0.0-*" PrivateAssets="All"/>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Spire.PDF" Version="10.4.7" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="..\..\Shared\Themes\Generic.xaml">
